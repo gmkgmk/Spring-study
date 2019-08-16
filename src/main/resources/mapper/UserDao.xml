@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.apec.user.dao.UserDao">
+	<!--增加-->
+    <insert id="addUser">
+        <!-- ignore 主键冲突，报错 -->
+        INSERT ignore INTO User (name, age, sex, phone)
+        VALUES (#{name}, #{age}, ${sex}, ${phone})
+    </insert>
+    <!--修改-->
+	<update id="updateUser">
+		UPDATE User
+		SET name = #{name},age = #{age},phone = #{phone},sex = #{sex}
+		where
+		  id = #{id}
+	</update>
+	<!--查询-->
+    <select id="queryAll" resultType="User">
+		SELECT
+		    name,
+		    age,
+		    sex,
+		    phone
+		FROM
+		   User
+	</select>
+
+    <!--删除-->
+    <delete id="removeById">
+        DELETE
+        FROM
+          User
+        where
+          id = #{id}
+    </delete>
+
+    <!--查询单个-->
+    <select id="queryById" resultType="User">
+        select
+		    name,
+		    age,
+		    sex,
+		    phone
+		  FROM
+		    User
+		  WHERE
+		    id = #{id}
+    </select>
+</mapper>
+
